@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Valencia Meal Plan</title>
-<meta name="description" content="A simple weekly meal plan for weight loss in Valencia — English, Español, Русский, Հայերեն.">
+<title>PlatoPlan · Weekly Meal Plan</title>
+<meta name="description" content="A simple weekly weight-loss meal plan with recipes and a shopping list for Mercadona and Consum. English, Español, Русский, Հայերեն.">
+<meta property="og:title" content="PlatoPlan · Weekly Meal Plan">
+<meta property="og:description" content="Lose 0.5 kg a week: 7-day menu, 15-minute recipes and a shopping list for Mercadona & Consum.">
+<meta property="og:image" content="img/l6.webp">
 <meta name="theme-color" content="#2349A8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='36' r='24' fill='%23F07F1E'/%3E%3Cpath d='M32 12c6-8 16-8 20-6-4 8-12 10-20 6z' fill='%234E8A3E'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,22 +15,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+Armenian:wght@400;600;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F4F7FB;
-  --card:#FFFFFF;
-  --ink:#12233F;
-  --muted:#5A6A85;
-  --line:#D9E1EE;
-  --cobalt:#2349A8;
-  --cobalt-soft:#E3EAFA;
-  --naranja:#F07F1E;
-  --naranja-soft:#FDEBDB;
-  --huerta:#4E8A3E;
-  --saffron:#E8B63A;
-  --oil:#A89A2E;
+  --paper:#F4F7FB;--card:#FFFFFF;--ink:#12233F;--muted:#5A6A85;--line:#D9E1EE;
+  --cobalt:#2349A8;--cobalt-soft:#E3EAFA;--naranja:#F07F1E;--naranja-soft:#FDEBDB;
+  --huerta:#4E8A3E;--saffron:#E8B63A;--oil:#A89A2E;
   --display:"Unbounded","Noto Sans Armenian",system-ui,sans-serif;
   --body:"Manrope","Noto Sans Armenian",system-ui,sans-serif;
-  --radius:18px;
-  color-scheme:light;
+  --radius:18px;color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -46,13 +39,15 @@ html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 a{color:inherit}
+button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--naranja);outline-offset:3px;border-radius:6px}
+img{display:block;max-width:100%}
 
 /* Header */
 .top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:20px;height:64px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:15px;text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
-.brand svg{flex:none}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:18px;text-decoration:none;letter-spacing:-.02em;white-space:nowrap}
+.brand b{color:var(--naranja);font-weight:800}
 .sections{display:flex;gap:4px;margin-left:auto}
 .sections a{font-size:14px;font-weight:600;text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:999px}
 .sections a:hover{color:var(--ink);background:var(--cobalt-soft)}
@@ -74,8 +69,7 @@ h1 em{font-style:normal;color:var(--naranja)}
 .fact+.fact{padding-left:14px;border-left:1px solid var(--line)}
 .fact b{display:block;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.02em;white-space:nowrap}
 .fact span{display:block;font-size:13px;color:var(--muted);line-height:1.35;margin-top:2px}
-
-.plate-card{display:flex;flex-direction:column;align-items:center}
+.plate-card{display:flex;flex-direction:column;align-items:center;margin:0}
 .plate-card h2{font-family:var(--display);font-size:16px;font-weight:700;margin:0 0 6px;text-align:center;letter-spacing:-.01em}
 .plate{width:min(100%,380px);height:auto;filter:drop-shadow(0 18px 30px rgba(18,35,63,.16))}
 .plate .slice,.plate .drop{transform-box:view-box;transform-origin:160px 160px;transition:opacity .25s}
@@ -90,6 +84,7 @@ h1 em{font-style:normal;color:var(--naranja)}
   .plate .s-veg{animation-delay:.15s}.plate .s-protein{animation-delay:.35s}.plate .s-carbs{animation-delay:.55s}.plate .drop{animation-delay:.8s}
   .legend li{animation:rise .5s ease-out backwards}
   .legend li:nth-child(1){animation-delay:.25s}.legend li:nth-child(2){animation-delay:.45s}.legend li:nth-child(3){animation-delay:.65s}.legend li:nth-child(4){animation-delay:.9s}
+  .dish:hover .ph img,.cell:hover .th img{transform:scale(1.05)}
 }
 @keyframes pop{from{opacity:0;transform:scale(.55) rotate(-12deg)}to{opacity:1;transform:none}}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -100,24 +95,35 @@ section.block{padding:56px 0}
 h2.title{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,38px);letter-spacing:-.03em;line-height:1.1;margin:0}
 .sub{color:var(--muted);margin:6px 0 0;font-size:16px}
 
-/* Day */
-.day{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
-.meal{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px 20px;position:relative}
-.meal .es{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em;color:var(--cobalt)}
-.meal .what{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2px 0 12px}
-.meal p{margin:0;font-size:15.5px}
-.meal .opt{background:var(--paper);border-radius:12px;padding:10px 12px;font-size:15px}
-.meal .or{display:block;text-align:center;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--naranja);margin:6px 0}
+/* Day: meal cards with photos */
+.day{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.meal{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:12px}
 .meal.main{border-color:var(--cobalt);box-shadow:inset 0 4px 0 var(--cobalt)}
-.meal .dot{position:absolute;top:22px;right:20px;width:10px;height:10px;border-radius:50%;background:var(--line)}
-.meal.main .dot{background:var(--naranja)}
+.meal .es{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02em;color:var(--cobalt);line-height:1.1}
+.meal .what{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:4px}
+.meal .rule{margin:0;font-size:14.5px;color:var(--muted)}
+.or{display:block;text-align:center;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--naranja);margin:-4px 0}
+
+.dish{display:block;width:100%;text-align:left;background:var(--paper);border:1px solid transparent;border-radius:14px;padding:0;cursor:pointer;overflow:hidden;transition:border-color .2s}
+.dish:hover{border-color:var(--cobalt)}
+.dish .ph{aspect-ratio:4/3;overflow:hidden;background:var(--line);position:relative}
+.dish .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.dish .tag{position:absolute;left:8px;top:8px;font:800 11px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;background:var(--naranja);color:#fff;padding:5px 8px;border-radius:999px}
+.dish .tx{padding:10px 12px 12px;font-size:14.5px;line-height:1.4}
+.dish .tx b{display:block;font-weight:700}
+.cook{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:800;color:var(--cobalt);margin-top:6px}
+.cook::after{content:"→";transition:transform .2s}
+.dish:hover .cook::after,.cell:hover .cook::after{transform:translateX(3px)}
 
 /* Menu */
 .week{display:grid;gap:10px}
-.row{display:grid;grid-template-columns:170px 1fr 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.row .d{padding:18px 20px;font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.02em;display:flex;flex-direction:column;justify-content:center;gap:6px}
-.row .m{padding:16px 20px;border-left:1px solid var(--line);font-size:15.5px}
-.row .m small{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:3px}
+.row{display:grid;grid-template-columns:150px 1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.row .d{padding:18px 20px;font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.02em;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.cell{display:flex;gap:14px;align-items:center;text-align:left;padding:12px 16px 12px 12px;border:0;border-left:1px solid var(--line);background:none;cursor:pointer;font-size:15px;line-height:1.4}
+.cell:hover{background:var(--cobalt-soft)}
+.cell .th{flex:none;width:84px;height:84px;border-radius:12px;overflow:hidden;background:var(--line)}
+.cell .th img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.cell small{display:block;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:2px}
 .row.today{border-color:var(--naranja);box-shadow:0 0 0 1px var(--naranja)}
 .row.today .d{background:var(--naranja-soft)}
 .badge{align-self:flex-start;font:800 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;background:var(--naranja);color:#fff;padding:5px 8px;border-radius:999px}
@@ -130,17 +136,19 @@ h2.title{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,3
 .progress{display:flex;align-items:center;gap:14px;margin-bottom:22px;font-weight:700;font-size:15px}
 .bar{flex:1;height:8px;background:var(--line);border-radius:999px;overflow:hidden;max-width:420px}
 .bar i{display:block;height:100%;width:0;background:var(--huerta);border-radius:999px;transition:width .3s}
-.shop{columns:3 280px;column-gap:16px}
-.cat{break-inside:avoid;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 10px;margin:0 0 16px}
-.cat h3{font-family:var(--display);font-size:16px;font-weight:700;margin:0 0 8px;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
+.shop{columns:3 290px;column-gap:16px}
+.cat{break-inside:avoid;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px 8px;margin:0 0 16px}
+.cat h3{font-family:var(--display);font-size:16px;font-weight:700;margin:0 0 6px;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
 .cat h3 i{width:10px;height:10px;border-radius:3px;transform:rotate(45deg)}
 .cat ul{list-style:none;margin:0;padding:0}
-.cat label{display:flex;gap:12px;align-items:flex-start;padding:8px 4px;border-top:1px dashed var(--line);cursor:pointer;font-size:15px;line-height:1.4}
+.cat label{display:flex;gap:12px;align-items:center;padding:7px 2px;border-top:1px dashed var(--line);cursor:pointer;font-size:15px;line-height:1.35}
 .cat li:first-child label{border-top:0}
-.cat input{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;margin:1px 0 0;border:2px solid var(--line);border-radius:6px;background:var(--paper);cursor:pointer;display:grid;place-items:center}
+.cat .pic{flex:none;width:46px;height:46px;border-radius:50%;object-fit:cover;background:var(--line);transition:filter .2s,opacity .2s}
+.cat input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:0;border:2px solid var(--line);border-radius:7px;background:var(--paper);cursor:pointer;display:grid;place-items:center}
 .cat input:checked{background:var(--huerta);border-color:var(--huerta)}
 .cat input:checked::after{content:"";width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
-.cat input:checked+span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--huerta)}
+.cat input:checked~span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--huerta)}
+.cat input:checked~.pic{filter:grayscale(1);opacity:.5}
 
 /* Tips */
 .tips{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}
@@ -148,20 +156,51 @@ h2.title{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,3
 .tiplist li{padding:18px 22px;border-top:1px solid var(--line);font-size:16px}
 .tiplist li:first-child{border-top:0}
 .tiplist strong{color:var(--cobalt)}
-.adjust{background:var(--cobalt);color:#fff;border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
-:root[data-theme="dark"] .adjust{background:var(--cobalt-soft)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .adjust{background:var(--cobalt-soft)}}
+.adjust{background:#2349A8;color:#fff;border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
 .adjust h3{font-family:var(--display);font-size:20px;margin:0 0 16px;letter-spacing:-.02em}
-.rule{display:flex;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,.2)}
-.rule .arrow{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:18px}
-.rule.up .arrow{background:var(--saffron);color:#12233F}
-.rule.down .arrow{background:#fff;color:#2349A8}
-.rule p{margin:0;font-size:15.5px}
-.rule b{display:block;margin-top:4px;font-size:16px}
+.arule{display:flex;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,.2)}
+.arule .arrow{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:18px}
+.arule.up .arrow{background:#F0C657;color:#12233F}
+.arule.down .arrow{background:#fff;color:#2349A8}
+.arule p{margin:0;font-size:15.5px}
+.arule b{display:block;margin-top:4px;font-size:16px}
 .tile{position:absolute;right:-30px;bottom:-30px;width:140px;opacity:.14}
+
+/* Ads */
+.ad{display:none;margin:8px auto 0;max-width:1120px;padding:0 20px}
+.ad.on{display:block}
+.ad small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;text-align:center}
+.ad .slot{min-height:100px;border-radius:12px;overflow:hidden}
+
+/* Recipe dialog */
+dialog{border:0;padding:0;border-radius:22px;width:min(760px,calc(100% - 24px));max-height:calc(100% - 24px);background:var(--card);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35);overflow:auto}
+dialog::backdrop{background:rgba(9,16,30,.6);backdrop-filter:blur(3px)}
+.rhero{position:relative;aspect-ratio:16/8;background:var(--line)}
+.rhero img{width:100%;height:100%;object-fit:cover}
+.rhero figcaption{position:absolute;right:10px;bottom:8px;font-size:11px;color:#fff;background:rgba(0,0,0,.45);padding:3px 8px;border-radius:999px;max-width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rhero figcaption a{color:#fff}
+.x{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#12233F;font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.rbody{padding:24px 28px 30px}
+.rbody h2{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,30px);letter-spacing:-.03em;line-height:1.15;margin:0 0 10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{font-size:13px;font-weight:800;padding:6px 11px;border-radius:999px;background:var(--cobalt-soft);color:var(--cobalt)}
+.chip.o{background:var(--naranja-soft);color:var(--naranja)}
+.rgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px}
+.rgrid h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 10px}
+.ing{list-style:none;margin:0;padding:0}
+.ing li{padding:8px 0 8px 22px;border-top:1px dashed var(--line);position:relative;font-size:15.5px}
+.ing li:first-child{border-top:0}
+.ing li::before{content:"";position:absolute;left:4px;top:16px;width:7px;height:7px;border-radius:50%;background:var(--huerta)}
+.ing li.sep{padding-left:0;color:var(--muted);font-weight:700}
+.ing li.sep::before{display:none}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 44px;font-size:15.5px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:30px;height:30px;border-radius:50%;background:var(--cobalt);color:var(--paper);font:800 14px/30px var(--body);text-align:center}
+.steps li:not(:last-child)::after{content:"";position:absolute;left:14.5px;top:32px;bottom:4px;width:1px;background:var(--line)}
 
 footer{margin-top:40px;padding:34px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer nav{display:flex;gap:16px}
 .strip{height:14px;background-image:radial-gradient(circle at 7px 7px,var(--cobalt) 3px,transparent 3.5px),linear-gradient(90deg,transparent 13px,var(--line) 13px);background-size:28px 14px;opacity:.5}
 
 /* Responsive */
@@ -171,32 +210,35 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .hero .wrap{grid-template-columns:1fr;gap:36px}
   .day{grid-template-columns:1fr 1fr}
   .tips{grid-template-columns:1fr}
+  .row{grid-template-columns:120px 1fr 1fr}
 }
 @media (max-width:640px){
   body{font-size:16px}
   .wrap{padding:0 16px}
-  .brand .name{display:none}
   .hero{padding:32px 0 20px}
   .facts{grid-template-columns:1fr 1fr}
   .fact:nth-child(3){padding-left:0;border-left:0}
   .fact:nth-child(n+3){border-top:1px solid var(--line)}
   .day{grid-template-columns:1fr}
   .row{grid-template-columns:1fr}
-  .row .d{flex-direction:row;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line)}
-  .row .m{border-left:0;padding:12px 18px}
-  .row .m+.m{border-top:1px dashed var(--line)}
+  .row .d{flex-direction:row;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .cell{border-left:0;padding:10px 12px}
+  .cell+.cell{border-top:1px dashed var(--line)}
+  .cell .th{width:72px;height:72px}
   .legend{grid-template-columns:1fr}
   section.block{padding:40px 0}
   .langs button{padding:9px 9px}
+  .rgrid{grid-template-columns:1fr;gap:20px}
+  .rbody{padding:20px 18px 24px}
+  .rhero{aspect-ratio:4/3}
 }
 @media print{
-  .top,.tools,.progress,.plate-card .plate{display:none!important}
+  .top,.tools,.progress,.plate,.ad,dialog,.cook{display:none!important}
   body{background:#fff;color:#000;font-size:12px}
   section.block{padding:16px 0;break-inside:avoid-page}
   .hero{padding:0}
   .meal,.row,.cat,.tiplist{border-color:#bbb}
   .adjust{background:#fff!important;color:#000;border:1px solid #bbb}
-  .rule{border-color:#ddd}
 }
 </style>
 </head>
@@ -204,9 +246,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Valencia">
+    <a class="brand" href="#top" aria-label="PlatoPlan">
       <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="36" r="24" fill="var(--naranja)"/><path d="M32 12c6-8 16-8 20-6-4 8-12 10-20 6z" fill="var(--huerta)"/></svg>
-      <span class="name" data-t="brand"></span>
+      <span>Plato<b>Plan</b></span>
     </a>
     <nav class="sections" aria-label="Sections">
       <a href="#day" data-t="navDay"></a>
@@ -232,7 +274,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <p class="lead" data-t="lead"></p>
         <div class="facts" id="facts"></div>
       </div>
-      <figure class="plate-card" style="margin:0">
+      <figure class="plate-card">
         <h2 data-t="plateTitle"></h2>
         <svg class="plate" id="plate" viewBox="0 0 320 320" role="img" aria-labelledby="plateDesc">
           <title id="plateDesc"></title>
@@ -262,12 +304,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
   </section>
 
+  <div class="ad" data-ad="1"><small data-t="ad"></small><div class="slot"></div></div>
+
   <section class="block" id="menu">
     <div class="wrap">
       <div class="head"><div><h2 class="title" data-t="menuTitle"></h2><p class="sub" data-t="menuSub"></p></div></div>
       <div class="week" id="week"></div>
     </div>
   </section>
+
+  <div class="ad" data-ad="2"><small data-t="ad"></small><div class="slot"></div></div>
 
   <section class="block" id="shop">
     <div class="wrap">
@@ -290,42 +336,77 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <ul class="tiplist" id="tipList"></ul>
         <aside class="adjust">
           <h3 data-t="adjustTitle"></h3>
-          <div class="rule up"><span class="arrow" aria-hidden="true">↑</span><p><span data-t="upIf"></span><b data-t="upDo"></b></p></div>
-          <div class="rule down"><span class="arrow" aria-hidden="true">↓</span><p><span data-t="downIf"></span><b data-t="downDo"></b></p></div>
+          <div class="arule up"><span class="arrow" aria-hidden="true">↑</span><p><span data-t="upIf"></span><b data-t="upDo"></b></p></div>
+          <div class="arule down"><span class="arrow" aria-hidden="true">↓</span><p><span data-t="downIf"></span><b data-t="downDo"></b></p></div>
           <svg class="tile" viewBox="0 0 100 100" aria-hidden="true"><g fill="#fff"><circle cx="50" cy="50" r="10"/><ellipse cx="50" cy="20" rx="9" ry="16"/><ellipse cx="50" cy="80" rx="9" ry="16"/><ellipse cx="20" cy="50" rx="16" ry="9"/><ellipse cx="80" cy="50" rx="16" ry="9"/><circle cx="12" cy="12" r="5"/><circle cx="88" cy="12" r="5"/><circle cx="12" cy="88" r="5"/><circle cx="88" cy="88" r="5"/></g></svg>
         </aside>
       </div>
     </div>
   </section>
+
+  <div class="ad" data-ad="3"><small data-t="ad"></small><div class="slot"></div></div>
 </main>
 
 <div class="strip" aria-hidden="true"></div>
 <footer>
-  <div class="wrap"><span data-t="footer"></span><span data-t="disclaimer"></span></div>
+  <div class="wrap">
+    <span><span data-t="footer"></span> · <span data-t="disclaimer"></span></span>
+    <nav><a id="lnkPrivacy" href="privacy.html" data-t="privacy"></a><a id="lnkCredits" href="credits.html" data-t="credits"></a></nav>
+  </div>
 </footer>
 
+<dialog id="recipe" aria-labelledby="rTitle">
+  <figure class="rhero" style="margin:0"><img id="rImg" alt=""><figcaption id="rCredit"></figcaption>
+    <button class="x" type="button" id="rClose" autofocus>×</button></figure>
+  <div class="rbody">
+    <h2 id="rTitle"></h2>
+    <div class="chips" id="rChips"></div>
+    <div class="rgrid">
+      <div><h3 id="rIngH"></h3><ul class="ing" id="rIng"></ul></div>
+      <div><h3 id="rStepsH"></h3><ol class="steps" id="rSteps"></ol></div>
+    </div>
+  </div>
+</dialog>
+
+<script src="recipes.js"></script>
+<script src="credits.js"></script>
 <script>
+/* ===== Ads config: paste your Google AdSense IDs here to switch ads on ===== */
+const ADS = {
+  client: "",                      // e.g. "ca-pub-1234567890123456"
+  slots:  { 1: "", 2: "", 3: "" }  // ad unit IDs from AdSense → Ads → By ad unit
+};
+
 const COLORS={veg:"var(--huerta)",protein:"var(--naranja)",carbs:"var(--saffron)",oil:"var(--oil)"};
 const CAT_COLORS=["var(--naranja)","var(--cobalt)","var(--saffron)","var(--huerta)","var(--naranja)","var(--muted)"];
+const LUNCH=["l1","l2","l3","l4","l5","l6","l7"], DINNER=["d1","d2","d3","d4","d5","d6","d7"];
+const SHOP_IMG=[
+  ["p_chicken","p_pork","p_turkey","p_eggs","p_tuna","p_hake","p_salmon","p_sepia","p_prawns","l7"],
+  ["p_skyr","m1"],
+  ["p_rice","p_potato","p_lentils","p_chickpeas","p_oats","p_bread"],
+  ["p_salad","p_tomato","p_pepper","p_broccoli","p_spinach","p_mushroom","p_frozenveg","d4"],
+  ["p_orange"],
+  ["p_oil","p_nuts","p_spices"]
+];
 
 const T={
 en:{
-  title:"Valencia Meal Plan",brand:"Valencia meal plan",
+  title:"PlatoPlan · Weekly Meal Plan",
   navDay:"Your day",navMenu:"Menu",navShop:"Shopping",navTips:"Tips",
-  eyebrow:"Weekly plan · Valencia",
+  eyebrow:"Weekly plan · Mercadona & Consum",
   h1:"Eat well. Lose <em>0.5 kg</em> a week.",
   lead:"A simple weekly plan for about 2,100–2,200 kcal and ~150 g protein a day. Everything is available at Mercadona or Consum, and most meals take 15 minutes or less.",
   facts:[["2,100–2,200","kcal a day"],["~150 g","protein a day"],["−0.5 kg","per week"],["≤ 15 min","most meals"]],
   plateTitle:"The comida plate",
   plate:{veg:["Vegetables","half the plate"],protein:["Protein","a palm and a half"],carbs:["Carbs","one fist"],oil:["Olive oil","1 tbsp"]},
-  dayTitle:"Your day",daySub:"Four meals, the Spanish way.",or:"or",
+  dayTitle:"Your day",daySub:"Four meals, the Spanish way. Tap any dish to see how to cook it.",or:"or",
   meals:[
-    {es:"Desayuno",what:"Breakfast · choose one",opts:["3 scrambled eggs, 2 slices of whole-wheat toast with grated tomato, and 1 piece of fruit","250 g skyr or queso fresco batido 0%, 40 g oats, fruit and a few walnuts"]},
-    {es:"Comida",what:"Lunch · the main meal",main:true,text:"A palm-and-a-half of protein, a fist of carbs, half the plate vegetables, and 1 tbsp olive oil"},
-    {es:"Merienda",what:"Afternoon snack",text:"A Greek yogurt (ligero) or skyr with fruit, or fruit with 25 g of nuts"},
-    {es:"Cena",what:"Dinner · lighter",text:"Protein, vegetables and little or no carbs"}
+    {es:"Desayuno",what:"Breakfast · choose one"},
+    {es:"Comida",what:"Lunch · the main meal",rule:"A palm-and-a-half of protein, a fist of carbs, half the plate vegetables, and 1 tbsp olive oil"},
+    {es:"Merienda",what:"Afternoon snack",rule:"A Greek yogurt (ligero) or skyr with fruit, or fruit with 25 g of nuts"},
+    {es:"Cena",what:"Dinner · lighter",rule:"Protein, vegetables and little or no carbs"}
   ],
-  menuTitle:"This week's menu",menuSub:"Today is highlighted.",lunch:"Comida · lunch",dinner:"Cena · dinner",today:"Today",
+  menuTitle:"This week's menu",menuSub:"Today is highlighted. Tap a dish for the recipe.",lunch:"Comida · lunch",dinner:"Cena · dinner",today:"Today",
   days:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
   menu:[
     ["200 g grilled chicken breast + 150 g cooked rice + salad","3-egg French omelette + salad + 1 slice of bread"],
@@ -343,7 +424,7 @@ en:{
     ["Dairy",["6–7 skyr or queso fresco batido","7 Greek yogurts (ligero)"]],
     ["Carbs",["Brown or regular rice","Potatoes","1 jar of lentils","1 jar of chickpeas","Oats","Whole-wheat bread"]],
     ["Vegetables",["Bagged salad","Tomatoes","Peppers","Broccoli","Spinach","Mushrooms","Frozen stir-fry vegetables","Gazpacho (carton)"]],
-    ["Fruit",["About 14 pieces (oranges are in season in Valencia)"]],
+    ["Fruit",["About 14 pieces (oranges are in season in winter)"]],
     ["Other",["Extra virgin olive oil","Walnuts or almonds","Spices"]]
   ],
   tipsTitle:"Easy wins",
@@ -357,25 +438,27 @@ en:{
   adjustTitle:"Adjust as you go",
   upIf:"If you're losing more than 1 kg a week, or feel tired all the time:",upDo:"add a bit more rice or potato.",
   downIf:"If your weight doesn't move for 2–3 weeks:",downDo:"reduce portions slightly.",
-  footer:"Made for life in Valencia · Mercadona & Consum",disclaimer:"General guidance, not medical advice."
+  footer:"Made for life in Spain · Mercadona & Consum",disclaimer:"General guidance, not medical advice.",
+  cook:"How to cook",ingredients:"Ingredients",steps:"Steps",min:"min",close:"Close",guideIng:"Good choices",guideSteps:"How to order",photo:"Photo",
+  privacy:"Privacy",credits:"Photo credits",ad:"Advertisement"
 },
 es:{
-  title:"Plan de comidas · Valencia",brand:"Plan de comidas · Valencia",
+  title:"PlatoPlan · Plan semanal de comidas",
   navDay:"Tu día",navMenu:"Menú",navShop:"Compra",navTips:"Trucos",
-  eyebrow:"Plan semanal · Valencia",
+  eyebrow:"Plan semanal · Mercadona y Consum",
   h1:"Come bien. Pierde <em>0,5 kg</em> a la semana.",
   lead:"Un plan semanal sencillo de unas 2.100–2.200 kcal y ~150 g de proteína al día. Todo se encuentra en Mercadona o Consum, y la mayoría de las comidas se preparan en 15 minutos o menos.",
   facts:[["2.100–2.200","kcal al día"],["~150 g","proteína al día"],["−0,5 kg","por semana"],["≤ 15 min","casi todas las comidas"]],
   plateTitle:"El plato de la comida",
   plate:{veg:["Verduras","medio plato"],protein:["Proteína","palma y media"],carbs:["Hidratos","un puño"],oil:["Aceite de oliva","1 cucharada"]},
-  dayTitle:"Tu día",daySub:"Cuatro comidas, como se hace aquí.",or:"o",
+  dayTitle:"Tu día",daySub:"Cuatro comidas, como se hace aquí. Toca un plato para ver cómo se hace.",or:"o",
   meals:[
-    {es:"Desayuno",what:"Elige uno",opts:["3 huevos revueltos, 2 tostadas de pan integral con tomate rallado y 1 pieza de fruta","250 g de skyr o queso fresco batido 0%, 40 g de avena, fruta y unas nueces"]},
-    {es:"Comida",what:"La comida principal",main:true,text:"Palma y media de proteína, un puño de hidratos, medio plato de verduras y 1 cucharada de aceite de oliva"},
-    {es:"Merienda",what:"Por la tarde",text:"Un yogur griego ligero o skyr con fruta, o fruta con 25 g de frutos secos"},
-    {es:"Cena",what:"Más ligera",text:"Proteína, verduras y pocos o ningún hidrato"}
+    {es:"Desayuno",what:"Elige uno"},
+    {es:"Comida",what:"La comida principal",rule:"Palma y media de proteína, un puño de hidratos, medio plato de verduras y 1 cucharada de aceite de oliva"},
+    {es:"Merienda",what:"Por la tarde",rule:"Un yogur griego ligero o skyr con fruta, o fruta con 25 g de frutos secos"},
+    {es:"Cena",what:"Más ligera",rule:"Proteína, verduras y pocos o ningún hidrato"}
   ],
-  menuTitle:"Menú de la semana",menuSub:"Hoy aparece resaltado.",lunch:"Comida",dinner:"Cena",today:"Hoy",
+  menuTitle:"Menú de la semana",menuSub:"Hoy aparece resaltado. Toca un plato para ver la receta.",lunch:"Comida",dinner:"Cena",today:"Hoy",
   days:["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"],
   menu:[
     ["200 g de pechuga de pollo a la plancha + 150 g de arroz cocido + ensalada","Tortilla francesa de 3 huevos + ensalada + 1 rebanada de pan"],
@@ -393,7 +476,7 @@ es:{
     ["Lácteos",["6–7 skyr o queso fresco batido","7 yogures griegos ligeros"]],
     ["Hidratos",["Arroz integral o normal","Patatas","1 bote de lentejas","1 bote de garbanzos","Copos de avena","Pan integral"]],
     ["Verduras",["Ensalada en bolsa","Tomates","Pimientos","Brócoli","Espinacas","Champiñones","Verduras congeladas para saltear","Gazpacho (brick)"]],
-    ["Fruta",["Unas 14 piezas (en Valencia es temporada de naranjas)"]],
+    ["Fruta",["Unas 14 piezas (en invierno es temporada de naranjas)"]],
     ["Otros",["Aceite de oliva virgen extra","Nueces o almendras","Especias"]]
   ],
   tipsTitle:"Trucos fáciles",
@@ -407,25 +490,27 @@ es:{
   adjustTitle:"Ajusta sobre la marcha",
   upIf:"Si pierdes más de 1 kg a la semana o notas cansancio todo el tiempo:",upDo:"añade un poco más de arroz o patata.",
   downIf:"Si el peso no se mueve en 2–3 semanas:",downDo:"reduce un poco las raciones.",
-  footer:"Hecho para vivir en Valencia · Mercadona y Consum",disclaimer:"Orientación general, no es consejo médico."
+  footer:"Hecho para vivir en España · Mercadona y Consum",disclaimer:"Orientación general, no es consejo médico.",
+  cook:"Cómo se hace",ingredients:"Ingredientes",steps:"Pasos",min:"min",close:"Cerrar",guideIng:"Buenas opciones",guideSteps:"Cómo pedir",photo:"Foto",
+  privacy:"Privacidad",credits:"Créditos de fotos",ad:"Publicidad"
 },
 ru:{
-  title:"План питания · Валенсия",brand:"План питания · Валенсия",
+  title:"PlatoPlan · План питания на неделю",
   navDay:"День",navMenu:"Меню",navShop:"Покупки",navTips:"Советы",
-  eyebrow:"Недельный план · Валенсия",
+  eyebrow:"Недельный план · Mercadona и Consum",
   h1:"Ешь правильно. Худей на <em>0,5 кг</em> в неделю.",
   lead:"Простой недельный план: около 2100–2200 ккал и ~150 г белка в день. Всё можно купить в Mercadona или Consum, а большинство блюд готовится за 15 минут или быстрее.",
   facts:[["2100–2200","ккал в день"],["~150 г","белка в день"],["−0,5 кг","в неделю"],["≤ 15 мин","почти все блюда"]],
   plateTitle:"Тарелка на обед (comida)",
   plate:{veg:["Овощи","половина тарелки"],protein:["Белок","полторы ладони"],carbs:["Углеводы","один кулак"],oil:["Оливковое масло","1 ст. ложка"]},
-  dayTitle:"Твой день",daySub:"Четыре приёма пищи — по-испански.",or:"или",
+  dayTitle:"Твой день",daySub:"Четыре приёма пищи — по-испански. Нажми на блюдо, чтобы увидеть рецепт.",or:"или",
   meals:[
-    {es:"Desayuno",what:"Завтрак · на выбор",opts:["3 яйца-болтуньи, 2 ломтика цельнозернового тоста с тёртым помидором и 1 фрукт","250 г скира или queso fresco batido 0%, 40 г овсянки, фрукт и несколько грецких орехов"]},
-    {es:"Comida",what:"Обед · главный приём пищи",main:true,text:"Полторы ладони белка, кулак углеводов, половина тарелки овощей и 1 ст. ложка оливкового масла"},
-    {es:"Merienda",what:"Полдник",text:"Греческий йогурт (ligero) или скир с фруктом, либо фрукт и 25 г орехов"},
-    {es:"Cena",what:"Ужин · полегче",text:"Белок, овощи и минимум углеводов или совсем без них"}
+    {es:"Desayuno",what:"Завтрак · на выбор"},
+    {es:"Comida",what:"Обед · главный приём пищи",rule:"Полторы ладони белка, кулак углеводов, половина тарелки овощей и 1 ст. ложка оливкового масла"},
+    {es:"Merienda",what:"Полдник",rule:"Греческий йогурт (ligero) или скир с фруктом, либо фрукт и 25 г орехов"},
+    {es:"Cena",what:"Ужин · полегче",rule:"Белок, овощи и минимум углеводов или совсем без них"}
   ],
-  menuTitle:"Меню на неделю",menuSub:"Сегодняшний день выделен.",lunch:"Comida · обед",dinner:"Cena · ужин",today:"Сегодня",
+  menuTitle:"Меню на неделю",menuSub:"Сегодняшний день выделен. Нажми на блюдо, чтобы открыть рецепт.",lunch:"Comida · обед",dinner:"Cena · ужин",today:"Сегодня",
   days:["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"],
   menu:[
     ["200 г куриной грудки на гриле + 150 г варёного риса + салат","Омлет из 3 яиц (tortilla francesa) + салат + 1 ломтик хлеба"],
@@ -443,7 +528,7 @@ ru:{
     ["Молочное",["6–7 скиров или queso fresco batido","7 греческих йогуртов (ligero)"]],
     ["Углеводы",["Бурый или обычный рис","Картофель","1 банка чечевицы (lentejas)","1 банка нута (garbanzos)","Овсяные хлопья (copos de avena)","Цельнозерновой хлеб (pan integral)"]],
     ["Овощи",["Салат в пакете","Помидоры","Перец","Брокколи","Шпинат","Шампиньоны","Замороженная овощная смесь для жарки","Гаспачо (в пакете)"]],
-    ["Фрукты",["Около 14 штук (в Валенсии сейчас сезон апельсинов)"]],
+    ["Фрукты",["Около 14 штук (зимой сезон апельсинов)"]],
     ["Другое",["Оливковое масло extra virgin (virgen extra)","Грецкие орехи или миндаль","Специи"]]
   ],
   tipsTitle:"Простые правила",
@@ -457,25 +542,27 @@ ru:{
   adjustTitle:"Корректируй по ходу",
   upIf:"Если теряешь больше 1 кг в неделю или постоянно чувствуешь усталость:",upDo:"добавь немного риса или картофеля.",
   downIf:"Если вес не меняется 2–3 недели:",downDo:"немного уменьши порции.",
-  footer:"Для жизни в Валенсии · Mercadona и Consum",disclaimer:"Общие рекомендации, не медицинский совет."
+  footer:"Для жизни в Испании · Mercadona и Consum",disclaimer:"Общие рекомендации, не медицинский совет.",
+  cook:"Как готовить",ingredients:"Ингредиенты",steps:"Шаги",min:"мин",close:"Закрыть",guideIng:"Хороший выбор",guideSteps:"Как заказывать",photo:"Фото",
+  privacy:"Конфиденциальность",credits:"Авторы фото",ad:"Реклама"
 },
 hy:{
-  title:"Սննդի պլան · Վալենսիա",brand:"Սննդի պլան · Վալենսիա",
+  title:"PlatoPlan · Շաբաթական սննդի պլան",
   navDay:"Օրը",navMenu:"Ճաշացանկ",navShop:"Գնումներ",navTips:"Խորհուրդներ",
-  eyebrow:"Շաբաթական պլան · Վալենսիա",
+  eyebrow:"Շաբաթական պլան · Mercadona և Consum",
   h1:"Կեր ճիշտ։ Նիհարիր շաբաթը <em>0,5 կգ</em>։",
   lead:"Պարզ շաբաթական պլան՝ օրական մոտ 2100–2200 կկալ և ~150 գ սպիտակուց։ Ամեն ինչ կա Mercadona-ում կամ Consum-ում, իսկ ուտեստների մեծ մասը պատրաստվում է 15 րոպեում կամ ավելի արագ։",
   facts:[["2100–2200","կկալ օրական"],["~150 գ","սպիտակուց օրական"],["−0,5 կգ","շաբաթական"],["≤ 15 րոպե","ուտեստների մեծ մասը"]],
   plateTitle:"Ճաշի (comida) ափսեն",
   plate:{veg:["Բանջարեղեն","ափսեի կեսը"],protein:["Սպիտակուց","մեկուկես ափ"],carbs:["Ածխաջրեր","մեկ բռունցք"],oil:["Ձիթապտղի յուղ","1 ճաշի գդալ"]},
-  dayTitle:"Քո օրը",daySub:"Օրական չորս անգամ՝ իսպանական ձևով։",or:"կամ",
+  dayTitle:"Քո օրը",daySub:"Օրական չորս անգամ՝ իսպանական ձևով։ Սեղմիր ուտեստի վրա՝ բաղադրատոմսը տեսնելու համար։",or:"կամ",
   meals:[
-    {es:"Desayuno",what:"Նախաճաշ · ընտրիր մեկը",opts:["3 ձվից խառնած ձվածեղ, 2 շերտ ամբողջահատիկ հացի տոստ՝ քերած լոլիկով, և 1 միրգ","250 գ skyr կամ queso fresco batido 0%, 40 գ վարսակ, միրգ և մի քանի ընկույզ"]},
-    {es:"Comida",what:"Ճաշ · օրվա հիմնական սնունդը",main:true,text:"Մեկուկես ափի չափ սպիտակուց, մեկ բռունցքի չափ ածխաջուր, ափսեի կեսը՝ բանջարեղեն, և 1 ճաշի գդալ ձիթապտղի յուղ"},
-    {es:"Merienda",what:"Կեսօրվա նախուտեստ",text:"Հունական յոգուրտ (ligero) կամ skyr մրգով, կամ միրգ՝ 25 գ ընկույզով"},
-    {es:"Cena",what:"Ընթրիք · ավելի թեթև",text:"Սպիտակուց, բանջարեղեն և քիչ ածխաջուր կամ ընդհանրապես առանց դրա"}
+    {es:"Desayuno",what:"Նախաճաշ · ընտրիր մեկը"},
+    {es:"Comida",what:"Ճաշ · օրվա հիմնական սնունդը",rule:"Մեկուկես ափի չափ սպիտակուց, մեկ բռունցքի չափ ածխաջուր, ափսեի կեսը՝ բանջարեղեն, և 1 ճաշի գդալ ձիթապտղի յուղ"},
+    {es:"Merienda",what:"Կեսօրվա նախուտեստ",rule:"Հունական յոգուրտ (ligero) կամ skyr մրգով, կամ միրգ՝ 25 գ ընկույզով"},
+    {es:"Cena",what:"Ընթրիք · ավելի թեթև",rule:"Սպիտակուց, բանջարեղեն և քիչ ածխաջուր կամ ընդհանրապես առանց դրա"}
   ],
-  menuTitle:"Շաբաթվա ճաշացանկ",menuSub:"Այսօրվա օրը ընդգծված է։",lunch:"Comida · ճաշ",dinner:"Cena · ընթրիք",today:"Այսօր",
+  menuTitle:"Շաբաթվա ճաշացանկ",menuSub:"Այսօրվա օրը ընդգծված է։ Սեղմիր ուտեստի վրա՝ բաղադրատոմսի համար։",lunch:"Comida · ճաշ",dinner:"Cena · ընթրիք",today:"Այսօր",
   days:["Երկուշաբթի","Երեքշաբթի","Չորեքշաբթի","Հինգշաբթի","Ուրբաթ","Շաբաթ","Կիրակի"],
   menu:[
     ["200 գ գրիլ հավի կրծքամիս + 150 գ եփած բրինձ + աղցան","3 ձվից օմլետ (tortilla francesa) + աղցան + 1 շերտ հաց"],
@@ -493,7 +580,7 @@ hy:{
     ["Կաթնամթերք",["6–7 skyr կամ queso fresco batido","7 հունական յոգուրտ (ligero)"]],
     ["Ածխաջրեր",["Շագանակագույն կամ սովորական բրինձ","Կարտոֆիլ","1 բանկա ոսպ (lentejas)","1 բանկա սիսեռ (garbanzos)","Վարսակի փաթիլներ (copos de avena)","Ամբողջահատիկ հաց (pan integral)"]],
     ["Բանջարեղեն",["Պատրաստի աղցան տոպրակով","Լոլիկ","Պղպեղ","Բրոկոլի","Սպանախ","Սունկ (champiñones)","Սառեցված բանջարեղենի խառնուրդ","Գասպաչո (տուփով)"]],
-    ["Մրգեր",["Մոտ 14 հատ (Վալենսիայում հիմա նարնջի սեզոնն է)"]],
+    ["Մրգեր",["Մոտ 14 հատ (ձմռանը նարնջի սեզոնն է)"]],
     ["Այլ",["Extra virgin ձիթապտղի յուղ (virgen extra)","Ընկույզ կամ նուշ","Համեմունքներ"]]
   ],
   tipsTitle:"Պարզ հնարքներ",
@@ -507,24 +594,33 @@ hy:{
   adjustTitle:"Ճշգրտիր ընթացքում",
   upIf:"Եթե շաբաթը 1 կգ-ից ավելի ես նիհարում կամ անընդհատ հոգնած ես՝",upDo:"մի քիչ ավելացրու բրինձ կամ կարտոֆիլ։",
   downIf:"Եթե 2–3 շաբաթ քաշը չի փոխվում՝",downDo:"մի փոքր փոքրացրու բաժինները։",
-  footer:"Ստեղծված Վալենսիայում ապրելու համար · Mercadona և Consum",disclaimer:"Ընդհանուր ուղեցույց է, ոչ բժշկական խորհուրդ։"
+  footer:"Ստեղծված Իսպանիայում ապրելու համար · Mercadona և Consum",disclaimer:"Ընդհանուր ուղեցույց է, ոչ բժշկական խորհուրդ։",
+  cook:"Ինչպես պատրաստել",ingredients:"Բաղադրիչներ",steps:"Քայլեր",min:"րոպե",close:"Փակել",guideIng:"Լավ ընտրություն",guideSteps:"Ինչպես պատվիրել",photo:"Լուսանկար",
+  privacy:"Գաղտնիություն",credits:"Լուսանկարների հեղինակներ",ad:"Գովազդ"
 }};
 
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 const $=s=>document.querySelector(s);
 const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e};
+const img=(id,cls,alt)=>{const i=el("img",cls);i.src=`img/${id}.webp`;i.alt=alt||"";i.loading="lazy";i.decoding="async";return i};
+const todayIdx=(new Date().getDay()+6)%7;
 
-/* Plate rim: azulejo-style petals */
-(function(){
-  const g=$("#rim");let h="";
-  for(let i=0;i<24;i++){const a=i*15;
-    h+=`<ellipse cx="160" cy="23" rx="5" ry="10" fill="var(--cobalt)" transform="rotate(${a} 160 160)"/>`;
-    h+=`<circle cx="160" cy="26" r="2.4" fill="var(--naranja)" transform="rotate(${a+7.5} 160 160)"/>`;}
-  g.innerHTML=h;
-})();
+/* Plate rim: tile-style petals */
+(function(){let h="";for(let i=0;i<24;i++){const a=i*15;
+  h+=`<ellipse cx="160" cy="23" rx="5" ry="10" fill="var(--cobalt)" transform="rotate(${a} 160 160)"/>`;
+  h+=`<circle cx="160" cy="26" r="2.4" fill="var(--naranja)" transform="rotate(${a+7.5} 160 160)"/>`;}
+  $("#rim").innerHTML=h})();
 
 let checked=new Set(JSON.parse(store.get("shop")||"[]"));
 let lang="en";
+
+/* A clickable dish card that opens its recipe */
+function dishCard(id,label,tag){
+  const t=T[lang],r=RECIPES[id];const b=el("button","dish");b.type="button";b.dataset.recipe=id;
+  const ph=el("div","ph");ph.append(img(id,null,r[lang][0]));if(tag)ph.append(el("span","tag",tag));
+  const tx=el("div","tx");tx.append(el("b",null,label||r[lang][0]),el("span","cook",t.cook));
+  b.append(ph,tx);return b;
+}
 
 function render(l){
   lang=T[l]?l:"en";const t=T[lang];
@@ -532,6 +628,8 @@ function render(l){
   document.querySelectorAll("[data-t]").forEach(n=>{n.textContent=t[n.dataset.t]});
   document.querySelectorAll(".langs button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
   $("#h1").innerHTML=t.h1;
+  $("#lnkPrivacy").href="privacy.html?lang="+lang;$("#lnkCredits").href="credits.html?lang="+lang;
+  $("#rClose").setAttribute("aria-label",t.close);
 
   const f=$("#facts");f.innerHTML="";
   t.facts.forEach(([v,l])=>{const d=el("div","fact");d.append(el("b",null,v),el("span",null,l));f.append(d)});
@@ -544,54 +642,106 @@ function render(l){
   });
   $("#plateDesc").textContent=t.plateTitle+": "+["veg","protein","carbs","oil"].map(k=>t.plate[k].join(" — ")).join("; ");
 
+  /* Your day: each meal card shows real dishes */
   const m=$("#meals");m.innerHTML="";
-  t.meals.forEach(x=>{
-    const c=el("article","meal"+(x.main?" main":""));c.append(el("span","dot"),el("div","es",x.es),el("div","what",x.what));
-    if(x.opts){x.opts.forEach((o,i)=>{if(i)c.append(el("span","or",t.or));c.append(el("p","opt",o))})}else c.append(el("p",null,x.text));
+  t.meals.forEach((x,i)=>{
+    const c=el("article","meal"+(i===1?" main":""));
+    const h=el("div");h.append(el("div","es",x.es),el("div","what",x.what));c.append(h);
+    if(i===0){c.append(dishCard("b1"),el("span","or",t.or),dishCard("b2"))}
+    else{
+      c.append(el("p","rule",x.rule));
+      const id=i===1?LUNCH[todayIdx]:i===3?DINNER[todayIdx]:"m1";
+      c.append(dishCard(id,i===2?null:t.menu[todayIdx][i===1?0:1],i===2?null:t.today));
+    }
     m.append(c);
   });
 
-  const w=$("#week");w.innerHTML="";const ti=(new Date().getDay()+6)%7;
+  /* Weekly menu with thumbnails */
+  const w=$("#week");w.innerHTML="";
   t.menu.forEach(([lu,di],i)=>{
-    const r=el("div","row"+(i===ti?" today":"")+(i>4?" weekend":""));
-    const d=el("div","d",t.days[i]);if(i===ti)d.append(el("span","badge",t.today));
-    const a=el("div","m");a.append(el("small",null,t.lunch),document.createTextNode(lu));
-    const b=el("div","m");b.append(el("small",null,t.dinner),document.createTextNode(di));
-    r.append(d,a,b);w.append(r);
+    const r=el("div","row"+(i===todayIdx?" today":"")+(i>4?" weekend":""));
+    const d=el("div","d",t.days[i]);if(i===todayIdx)d.append(el("span","badge",t.today));
+    r.append(d);
+    [[LUNCH[i],t.lunch,lu],[DINNER[i],t.dinner,di]].forEach(([id,lab,txt])=>{
+      const b=el("button","cell");b.type="button";b.dataset.recipe=id;
+      const th=el("div","th");th.append(img(id,null,""));
+      const s=el("div");s.append(el("small",null,lab),el("div",null,txt),el("span","cook",t.cook));
+      b.append(th,s);r.append(b);
+    });
+    w.append(r);
   });
 
+  /* Shopping list with product photos */
   const s=$("#shopList");s.innerHTML="";
   t.cats.forEach(([name,items],ci)=>{
     const c=el("div","cat");const h=el("h3");const ic=el("i");ic.style.background=CAT_COLORS[ci];h.append(ic,document.createTextNode(name));
     const ul=el("ul");
     items.forEach((it,ii)=>{const id=ci+"-"+ii;const li=el("li");const lb=el("label");const cb=el("input");cb.type="checkbox";cb.checked=checked.has(id);
       cb.addEventListener("change",()=>{cb.checked?checked.add(id):checked.delete(id);store.set("shop",JSON.stringify([...checked]));progress()});
-      lb.append(cb,el("span",null,it));li.append(lb);ul.append(li)});
+      lb.append(cb,img(SHOP_IMG[ci][ii],"pic",""),el("span",null,it));li.append(lb);ul.append(li)});
     c.append(h,ul);s.append(c);
   });
   progress();
 
   const tl=$("#tipList");tl.innerHTML="";
   t.tips.forEach(([b,r])=>{const li=el("li");li.append(el("strong",null,b),document.createTextNode(" "+r));tl.append(li)});
+
+  if(dlg.open&&current)fillRecipe(current);
 }
 function progress(){
   const total=document.querySelectorAll("#shopList input").length,n=document.querySelectorAll("#shopList input:checked").length;
   $("#progressText").textContent=T[lang].progress(n,total);$("#barFill").style.width=(total?n/total*100:0)+"%";
 }
-function setLang(l){render(l);store.set("lang",lang);const u=new URL(location);u.searchParams.set("lang",lang);history.replaceState(null,"",u)}
 
+/* ===== Recipe dialog ===== */
+const dlg=$("#recipe");let current=null;
+function fillRecipe(id){
+  const r=RECIPES[id],t=T[lang],[name,ing,steps]=r[lang];const guide=r.kind==="guide";
+  $("#rImg").src=`img/${id}.webp`;$("#rImg").alt=name;
+  const c=window.CREDITS&&CREDITS[id];const cap=$("#rCredit");cap.innerHTML="";
+  if(c){const a=el("a",null,`${t.photo}: ${c.artist} · ${c.license}`);a.href=c.page;a.target="_blank";a.rel="noopener";cap.append(a)}
+  $("#rTitle").textContent=name;
+  const ch=$("#rChips");ch.innerHTML="";
+  if(r.min)ch.append(el("span","chip o",`⏱ ${r.min} ${t.min}`));
+  [...LUNCH,...DINNER].forEach((x,i)=>{if(x===id)ch.append(el("span","chip",`${t.days[i%7]} · ${i<7?t.lunch:t.dinner}`))});
+  $("#rIngH").textContent=guide?t.guideIng:t.ingredients;$("#rStepsH").textContent=guide?t.guideSteps:t.steps;
+  const ul=$("#rIng");ul.innerHTML="";ing.forEach(x=>ul.append(el("li",/^—|:$/.test(x)?"sep":null,x)));
+  const ol=$("#rSteps");ol.innerHTML="";steps.forEach(x=>ol.append(el("li",null,x)));
+}
+function openRecipe(id,push=true){
+  if(!RECIPES[id])return;current=id;fillRecipe(id);
+  if(!dlg.open)dlg.showModal();dlg.scrollTop=0;
+  if(push)history.replaceState(null,"",location.pathname+location.search+"#r-"+id);
+}
+function closeRecipe(){if(dlg.open)dlg.close()}
+dlg.addEventListener("close",()=>{current=null;if(location.hash.startsWith("#r-"))history.replaceState(null,"",location.pathname+location.search)});
+dlg.addEventListener("click",e=>{if(e.target===dlg)closeRecipe()});
+$("#rClose").addEventListener("click",closeRecipe);
+document.addEventListener("click",e=>{const b=e.target.closest("[data-recipe]");if(b)openRecipe(b.dataset.recipe)});
+
+function setLang(l){render(l);store.set("lang",lang);const u=new URL(location);u.searchParams.set("lang",lang);history.replaceState(null,"",u)}
 document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
 $("#reset").addEventListener("click",()=>{checked.clear();store.set("shop","[]");document.querySelectorAll("#shopList input").forEach(i=>i.checked=false);progress()});
 $("#print").addEventListener("click",()=>window.print());
 
-/* Legend hover highlights the plate */
 const plate=$("#plate");
 $("#legend").addEventListener("mouseover",e=>{const li=e.target.closest("li");if(!li)return;plate.classList.add("dim");plate.querySelectorAll("[data-part]").forEach(p=>p.classList.toggle("on",p.dataset.part===li.dataset.part))});
-$("#legend").addEventListener("mouseleave",()=>{plate.classList.remove("dim")});
+$("#legend").addEventListener("mouseleave",()=>plate.classList.remove("dim"));
+
+/* ===== Ads (only when ADS.client is set) ===== */
+if(ADS.client){
+  const sc=document.createElement("script");sc.async=true;sc.crossOrigin="anonymous";
+  sc.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+ADS.client;document.head.append(sc);
+  document.querySelectorAll(".ad").forEach(box=>{const slot=ADS.slots[box.dataset.ad];if(!slot)return;
+    const ins=document.createElement("ins");ins.className="adsbygoogle";ins.style.display="block";
+    ins.dataset.adClient=ADS.client;ins.dataset.adSlot=slot;ins.dataset.adFormat="auto";ins.dataset.fullWidthResponsive="true";
+    box.querySelector(".slot").append(ins);box.classList.add("on");(window.adsbygoogle=window.adsbygoogle||[]).push({});});
+}
 
 const q=new URLSearchParams(location.search).get("lang");
 const nav=(navigator.language||"en").slice(0,2);
 render(q||store.get("lang")||(T[nav]?nav:"en"));
+if(location.hash.startsWith("#r-"))openRecipe(location.hash.slice(3),false);
 </script>
 </body>
 </html>

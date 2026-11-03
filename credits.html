@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PlatoPlan · Photo credits</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Noto+Sans+Armenian:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F4F7FB;--card:#fff;--ink:#12233F;--muted:#5A6A85;--line:#D9E1EE;--cobalt:#2349A8}
+@media (prefers-color-scheme:dark){:root{--paper:#0D1524;--card:#141E31;--ink:#E7EDF8;--muted:#9AA8C2;--line:#26334B;--cobalt:#8DAAFF}}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 "Manrope","Noto Sans Armenian",system-ui,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:32px 16px 60px}
+a{color:var(--cobalt)}
+h1{font-size:30px;letter-spacing:-.02em;margin:18px 0 4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:22px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.c img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.c div{padding:10px 12px;font-size:13px;color:var(--muted)}
+.c b{color:var(--ink);display:block}
+</style>
+</head>
+<body>
+<main>
+<p><a href="index.html" id="back">← PlatoPlan</a></p>
+<h1 id="h"></h1>
+<p id="intro"></p>
+<div class="grid" id="g"></div>
+</main>
+<script src="credits.js"></script>
+<script>
+const L={en:["Photo credits","Photos come from open sources. Each one is used under the licence shown; tap a card to see the original."],
+es:["Créditos de fotos","Las fotos proceden de fuentes abiertas. Cada una se usa bajo la licencia indicada; toca una tarjeta para ver el original."],
+ru:["Авторы фото","Фотографии взяты из открытых источников. Каждая используется по указанной лицензии; нажми на карточку, чтобы открыть оригинал."],
+hy:["Լուսանկարների հեղինակներ","Լուսանկարները բաց աղբյուրներից են։ Յուրաքանչյուրն օգտագործվում է նշված լիցենզիայով. սեղմիր քարտի վրա՝ բնօրինակը տեսնելու համար։"]};
+let l=new URLSearchParams(location.search).get("lang");try{l=l||localStorage.getItem("lang")}catch(e){}
+if(!L[l])l="en";document.documentElement.lang=l;
+document.getElementById("h").textContent=L[l][0];document.getElementById("intro").textContent=L[l][1];
+document.getElementById("back").href="index.html?lang="+l;
+const g=document.getElementById("g");
+Object.entries(window.CREDITS||{}).sort().forEach(([id,c])=>{
+  const a=document.createElement("a");a.className="c";a.href=c.page;a.target="_blank";a.rel="noopener";
+  const im=document.createElement("img");im.src="img/"+id+".webp";im.alt="";im.loading="lazy";
+  const d=document.createElement("div");const b=document.createElement("b");b.textContent=c.artist;
+  d.append(b,document.createTextNode(c.license+(c.source?" · "+c.source:"")));a.append(im,d);g.append(a);
+});
+</script>
+</body>
+</html>
